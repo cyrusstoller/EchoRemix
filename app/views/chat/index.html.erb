@@ -1,0 +1,42 @@
+<div class="row full-height">
+  <div class="medium-8 columns full-height">
+    <div class="vertical-table full-height">
+      <div class="vertical-table-row header">
+        <%= render "layouts/header" %>
+      </div>
+
+      <div class="vertical-table-row">
+        <div id="chat-container" class="callout">
+          <%= render partial: "instructions", locals: { nickname: @nickname } %>
+          <%= render partial: "loading" %>
+          <div id="chat-history"></div>
+          <div id="typing-indicator"></div>
+        </div>
+      </div>
+
+      <div class="vertical-table-row message-box">
+        <div class="vertical-table-spacing">
+          <textarea id="chat-message" placeholder="Type here (press enter to send)"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="medium-4 columns full-height">
+    <div class="callout secondary" id="chat-topic-box">
+      Consider discussing: <br>
+      <span id="chat-topic"></span>
+    </div>
+
+    <%= button_tag "Next Conversation", id: "chat-next", class: "button warning expanded" %>
+
+    <h5>Links shared</h5>
+    <div id="links-container">
+      <ul id="links-shared">
+        <li class="none-yet">None yet</li>
+      </ul>
+    </div>
+
+    <%= render partial: "layouts/footer" %>
+  </div>
+</div>

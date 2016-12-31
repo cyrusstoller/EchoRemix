@@ -1,0 +1,5 @@
+<%= content_tag :div, id: 'chat-instructions', data: { nickname: nickname } do %>
+  <%= render 'message', nickname: 'System', message: "Start with where you're from and what occupies most of your time
+    (e.g. your occupation, seeking employment, or taking care of your kids / parents)." %>
+  <%= render 'message', nickname: 'System', message: "When possible share URLs to help others understand your point of view." %>
+<% end %>

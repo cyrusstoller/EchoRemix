@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="large-6 medium-9 small-12 columns">
+
+    <p class="lead">
+      Anonymous one-on-one conversations about topics that matter.
+      <%= link_to "Learn more", action: "about" %> about what to expect.
+    </p>
+
+    <br>
+
+    <%= form_tag chat_path, method: :post do %>
+      <%= text_field_tag(:nickname, "", placeholder: "Choose a nickname") %>
+      <p class="help-text">
+        By clicking accept, you agree to abide by our 
+        <%= link_to "community guidelines", action: "community_guidelines" %>.
+      </p>
+      <%= submit_tag "Accept & Get Started", class: "button" %>
+    <% end %>
+  </div>
+</div>

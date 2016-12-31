@@ -1,0 +1,33 @@
+<h1>Topics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Weight</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td><%= topic.text %></td>
+        <td><%= topic.weight %></td>
+        <td>
+          <div class="button-group tiny no-bottom">
+            <%= link_to 'Show', topic, class: "button secondary" %>
+            <%= link_to 'Edit', edit_topic_path(topic), class: "button secondary" %>
+            <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' }, class: "button alert" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @topics, renderer: FoundationPagination::Rails %>
+
+<br>
+
+<%= render "form", topic: @topic %>

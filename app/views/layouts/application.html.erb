@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= title %></title>
+
+    <%= stylesheet_link_tag    'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render partial: 'shared/google_analytics' %>
+    <%= render partial: 'shared/social_meta' %>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <%= yield :header %>
+  </head>
+
+  <body>
+    <%= render partial: 'layouts/flash_messages' %>
+    <%= render partial: 'layouts/header' %>
+
+    <%= yield :unbound %>
+
+    <div class="row">
+      <div class="small-12 columns">
+        <%= yield %>
+      </div>
+    </div>
+
+    <% unless @no_footer %>
+      <%= render partial: 'layouts/footer' %>
+    <% end %>
+  </body>
+</html>

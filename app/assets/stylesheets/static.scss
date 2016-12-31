@@ -1,0 +1,31 @@
+// Place all the styles related to the static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.title-logo {
+  width: 300px;
+  padding: 40px 0;
+}
+
+footer {
+  padding-bottom: 20px;
+}
+
+.flash-message {
+  border: none;
+}
+
+.no-bottom {
+  margin-bottom: 0;
+}
+
+.faq-question {
+  font-weight: 500;
+  font-size: 130%;
+  margin-bottom: 0px;
+}
+
+.static-header {
+  font-size: 31px;
+  font-weight: 500;
+}

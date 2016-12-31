@@ -1,0 +1,17 @@
+<%= form_for(topic) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_field :text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :weight %>
+    <%= f.number_field :weight %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "button" %>
+  </div>
+<% end %>

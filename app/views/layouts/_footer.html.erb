@@ -1,0 +1,25 @@
+<%
+  opts = {}
+  if @no_footer
+    opts = { target: "_window" }
+  end
+%>
+
+<hr>
+
+<footer>
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="menu simple">
+        <li><%= link_to "About", about_path, opts %></li>
+        <li><%= link_to "FAQ", faq_path, opts %></li>
+        <li><%= link_to "Guidelines", community_guidelines_path, opts %></li>
+      </ul>
+
+      <small>
+        Made by <%= link_to "Cyrus Stoller", "http://www.cyrusstoller.com/?ref=echoremix", target: "_window" %>
+        © <%= Time.now.year %>
+      </small>
+    </div>
+  </div>
+</footer>

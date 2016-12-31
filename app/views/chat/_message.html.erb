@@ -1,0 +1,7 @@
+<% label_class = 'label' %>
+<% label_class += ' secondary' if nickname =~ /System/i %>
+
+<div class="message">
+  <%= content_tag :span, class: label_class, data: { nickname: nickname } do; nickname; end %>
+  <%= message %>
+</div>
