@@ -59,7 +59,7 @@ class ConversationChannel < ApplicationCable::Channel
     def action_signature(action, data)
       "#{self.class.name}##{action}".tap do |signature|
         if (arguments = data.except("action")).any?
-          arguments["message"] = "[FILTERED]"
+          arguments["message"] = "[FILTERED]" unless arguments["message"].nil?
           signature << "(#{arguments.inspect})"
         end
       end
