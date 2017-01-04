@@ -30,9 +30,13 @@ class Conversation
     end
 
     user_ids.each do |u_id|
-      ActionCable.server.logger.silence do
-        ActionCable.server.broadcast u_id, payload
-      end
+      broadcast_to_user(u_id, payload)
+    end
+  end
+
+  def self.broadcast_to_user(user_id, payload = {})
+    ActionCable.server.logger.silence do
+      ActionCable.server.broadcast user_id, payload
     end
   end
 
@@ -47,9 +51,7 @@ class Conversation
 
     user_ids.each do |u_id|
       unless u_id == user_id
-        ActionCable.server.logger.silence do
-          ActionCable.server.broadcast u_id, { nickname: nickname, typing: true }
-        end
+        broadcast_to_user(u_id, { nickname: nickname, typing: true })
       end
     end
   end
