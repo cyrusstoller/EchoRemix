@@ -24,6 +24,10 @@ class TopicTest < ActiveSupport::TestCase
     assert_includes %w(MyString1 MyString2), Topic.random
   end
 
+  test "should provide for the other text when one is excluded" do
+    assert_equal "MyString1", Topic.random("MyString2")
+  end
+
   test "should not throw an error when there are no Topics" do
     Topic.destroy_all
     assert_match /waiting/i, Topic.random

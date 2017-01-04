@@ -30,6 +30,9 @@ App.conversation = App.cable.subscriptions.create "ConversationChannel",
   egress: (get_next = true) ->
     @perform 'egress', get_next: get_next
 
+  next_topic: () ->
+    @perform 'next_topic', current_topic: $('#chat-topic').html()
+
 # manipulating the dom
 
 nickname = () ->
@@ -74,10 +77,14 @@ enable_chat = (data) ->
 disable_next = () ->
   $('#chat-next').addClass('disabled')
   $('#chat-next').attr('disabled', true)
+  $('#topic-next').addClass('disabled')
+  $('#topic-next').attr('disabled', true)
 
 enable_next = () ->
   $('#chat-next').removeClass('disabled')
   $('#chat-next').attr('disabled', false)
+  $('#topic-next').removeClass('disabled')
+  $('#topic-next').attr('disabled', false)
 
 disable_messages = () ->
   $('#chat-message').attr('disabled', true)
@@ -91,6 +98,10 @@ setup_chat_next = () ->
       App.conversation.egress()
       reset_conversation()
       e.preventDefault()
+    $('#chat-message').focus()
+  $('#topic-next').click (e) ->
+    App.conversation.next_topic()
+    e.preventDefault()
     $('#chat-message').focus()
 
 add_link = (partial) ->

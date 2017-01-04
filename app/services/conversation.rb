@@ -13,7 +13,8 @@ class Conversation
       REDIS.set u_id, @c_id
     end
 
-    self.class.broadcast(@c_id, "System", message: "You've been matched!", topic: Topic.random)
+    topic = Topic.random
+    self.class.broadcast(@c_id, "System", message: "You've been matched! Your first topic: #{topic}", topic: topic)
   end
 
   def self.broadcast(conversation_id, nickname, opts = {})
@@ -51,6 +52,13 @@ class Conversation
         end
       end
     end
+  end
+
+  def self.broadcast_next_topic(user_id, nickname, current_topic)
+    c_id = REDIS.get user_id
+    topic = Topic.random(current_topic)
+    msg = "#{nickname} has requested a new topic. Your next topic: #{topic}"
+    broadcast(c_id, "System", message: msg, topic: topic)
   end
 
   def self.format_message(nickname, message)

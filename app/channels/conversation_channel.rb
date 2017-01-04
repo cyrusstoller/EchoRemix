@@ -30,6 +30,10 @@ class ConversationChannel < ApplicationCable::Channel
     end
   end
 
+  def next_topic(data)
+    Conversation.broadcast_next_topic(user_id, nickname, data['current_topic'])
+  end
+
   private
 
     def disconnect_from_conversation

@@ -5,7 +5,16 @@ class Topic < ApplicationRecord
 
   scope :priority, -> { order(weight: :desc, text: :asc) }
 
-  def self.random
-    order("RANDOM()").first.text rescue "Waiting for new topics ..."
+  def self.random(current_topic = nil)
+    begin
+      if current_topic
+        res = where.not(text: current_topic)
+      else
+        res = all()
+      end
+      res.order("RANDOM()").first.text
+    rescue
+      "Waiting for new topics ..."
+    end
   end
 end
