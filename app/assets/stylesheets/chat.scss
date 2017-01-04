@@ -13,6 +13,7 @@ $message-box-height: $chat-message-height + 30px;
 
 #chat-container {
   height: calc(100vh - 220px);
+  min-height: 200px;
   margin-bottom: 0px;
   padding-bottom: 0px;
   overflow-y: auto;
