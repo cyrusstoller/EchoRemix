@@ -121,6 +121,11 @@ place_message = (data) ->
     add_message data.message
     $('#typing-indicator').html('')
 
+    if not document.hasFocus()
+      # https://developer.mozilla.org/en-US/docs/Web/API/Document/hasFocus
+      $('#chat-beep')[0].play()
+      # console.log "Plays sound"
+
 place_links = (data) ->
   if data.message
     for link in $(data.message).find('a')
