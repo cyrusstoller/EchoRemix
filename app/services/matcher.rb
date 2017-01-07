@@ -6,7 +6,7 @@ class Matcher
     prev_partners = []
 
     # cycle throught the waiting pool until you find a partner
-    while (REDIS.sismember "#{user_id}:recent", partner) do
+    while (REDIS.sismember "#{user_id}:recent", partner) || (user_id == partner) do
       prev_partners << partner
       partner = REDIS.spop(WAITING_POOL)
     end
