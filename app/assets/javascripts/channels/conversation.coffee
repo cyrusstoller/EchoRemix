@@ -66,11 +66,13 @@ reset_conversation = () ->
 disable_chat = () ->
   disable_next()
   disable_messages()
+  stop_timer()
   $('#chat-loading').removeClass('hide')
 
 enable_chat = (data) ->
   enable_next()
   enable_messages()
+  start_timer()
   $('#chat-loading').addClass('hide')
   $('#chat-message').focus()
 
@@ -140,6 +142,10 @@ back_in_waiting_pool = (data) ->
   if data.waiting_pool
     reset_conversation()
 
+#######################
+#  Typing Indicator   #
+#######################
+
 typing_interval = 1000
 send_typing_indicator = () ->
   past_val = ""
@@ -159,6 +165,50 @@ show_typing = (data) ->
     typing_indicator = setTimeout () ->
       $('#typing-indicator').html('')
     , typing_interval
+
+#######################
+# Timer Functionality #
+#######################
+
+timer_interval = 0
+chat_time = 0
+
+start_timer = () ->
+  if chat_time == 0
+    # console.log "start timer"
+    timer_interval = setInterval () ->
+      chat_time += 1
+      print_time()
+    , 1000
+
+stop_timer = () ->
+  # console.log "stop timer"
+  clearInterval(timer_interval)
+  chat_time = 0
+  print_time()
+
+print_time = () ->
+  $('#chat-time').html(time_string(chat_time))
+
+time_string = (seconds) ->
+  final_seconds = seconds % 60
+  minutes = Math.floor(seconds / 60)
+  final_minutes = minutes % 60
+  final_hours = Math.floor(minutes / 60)
+
+  temp = ensure_two_chars(final_minutes) + ":" + ensure_two_chars(final_seconds)
+
+  if final_hours > 0
+    final_hours + ":" + temp
+  else
+    temp
+
+ensure_two_chars = (num) ->
+  temp = num + ""
+  if temp.length < 2
+    "0" + temp
+  else
+    temp
 
 $(document).on 'turbolinks:load', ->
   submit_message()

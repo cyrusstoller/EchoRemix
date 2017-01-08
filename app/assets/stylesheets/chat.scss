@@ -74,9 +74,16 @@ body {
   height: $chat-message-height;
 }
 
-#typing-indicator {
+.chat-status-bar {
   height: 20px;
   font-size: 12px;
   padding-top: 10px;
+}
+
+#typing-indicator {
   padding-left: 16px;
+}
+
+#chat-timer {
+  float: right;
 }

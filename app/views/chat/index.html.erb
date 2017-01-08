@@ -11,7 +11,9 @@
           <%= render partial: "loading" %>
           <div id="chat-history"></div>
         </div>
-        <div id="typing-indicator"></div>
+
+        <div id="chat-timer" class="chat-status-bar">Time Elapsed: <span id="chat-time" >00:00</span></div>
+        <div id="typing-indicator" class="chat-status-bar"></div>
       </div>
 
       <div class="vertical-table-row message-box">
