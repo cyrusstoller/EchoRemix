@@ -21,7 +21,6 @@ class ChatController < ApplicationController
       redirect_to root_path
     else
       cookies.signed[:nickname] = nickname
-      cookies.signed[:uuid] = SecureRandom.uuid
       redirect_to action: "index"
     end
   end

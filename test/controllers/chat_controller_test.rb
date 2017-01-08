@@ -15,7 +15,6 @@ class ChatControllerTest < ActionDispatch::IntegrationTest
     create_a_nickname nickname
     assert_redirected_to chat_url
     assert_equal nickname, request.cookie_jar.signed['nickname']
-    assert_not_nil request.cookie_jar.signed['uuid']
   end
 
   test "should stay on the chat page if there is a nickname" do

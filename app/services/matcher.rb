@@ -22,8 +22,8 @@ class Matcher
     end
   end
 
-  def self.remove(uuid)
-    REDIS.srem(WAITING_POOL, uuid)
+  def self.remove(user_id)
+    REDIS.srem(WAITING_POOL, user_id)
   end
 
   def self.remove_all
