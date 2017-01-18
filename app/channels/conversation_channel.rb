@@ -2,6 +2,7 @@
 class ConversationChannel < ApplicationCable::Channel
   def subscribed
     stream_from user_id
+    REDIS.set "#{user_id}:nickname", nickname
   end
 
   def unsubscribed
@@ -10,6 +11,7 @@ class ConversationChannel < ApplicationCable::Channel
 
     # Make sure that this user isn't matched with anyone else
     Matcher.remove(user_id)
+    REDIS.del "#{user_id}:nickname"
   end
 
   def message(data)

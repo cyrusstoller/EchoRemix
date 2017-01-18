@@ -5,16 +5,29 @@ class Conversation
 
   def create
     @c_id = "conversation_" + SecureRandom.uuid
+    topic = Topic.random
 
     REDIS.sadd @c_id, @user_ids
 
     # set the user_id values to the c_id
     @user_ids.each do |u_id|
       REDIS.set u_id, @c_id
+      send_match(u_id, @user_ids, topic)
     end
+  end
 
-    topic = Topic.random
-    self.class.broadcast(@c_id, "System", message: "You've been matched! Your first topic: #{topic}", topic: topic)
+  def send_match(u_id, user_ids, topic)
+    other_user_ids = user_ids.reject { |i| i == u_id }
+    other_users = other_user_ids.map { |u| REDIS.get "#{u}:nickname" }.to_sentence
+
+    payload = {
+      nickname: "System",
+      message: self.class.format_message("System",
+        "You've been matched with #{other_users}! Your first topic: #{topic}"),
+      topic: topic
+    }
+
+    self.class.broadcast_to_user u_id, payload
   end
 
   def self.broadcast(conversation_id, nickname, opts = {})
