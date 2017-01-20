@@ -11,10 +11,25 @@
     <%= form_tag chat_path, method: :post do %>
       <%= text_field_tag(:nickname, "", placeholder: "Choose a nickname") %>
       <p class="help-text">
-        By clicking accept, you agree to abide by our 
+        By clicking accept, you agree to abide by our
         <%= link_to "community guidelines", action: "community_guidelines" %>.
       </p>
       <%= submit_tag "Accept & Get Started", class: "button" %>
     <% end %>
+
+    <br>
+    <div class="callout secondary">
+      <p>
+        <span class="label secondary">Info:</span> If you log onto EchoRemix and are <i>not</i> matched promptly,
+        please come back during one of our scheduled events.
+      </p>
+
+      <p>
+        For updates on upcoming events, please like (or follow)
+        <%= link_to "EchoRemix on Facebook", "https://www.facebook.com/echoremix", target: "_blank" %>,
+        or follow EchoRemix creator
+        <%= link_to "Cyrus Stoller on Twitter", "https://twitter.com/cyrusstoller", target: "_blank" %>.
+      </p>
+    </div>
   </div>
 </div>
