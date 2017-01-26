@@ -10,6 +10,10 @@ class ChatControllerTest < ActionDispatch::IntegrationTest
     post chat_url, params: { nickname: nickname }
   end
 
+  test "should redirect back to root if the nickname is blank" do
+    post chat_url, params: { nickname: " " }
+  end
+
   test "should create a chat signed cookie" do
     nickname = "cyro"
     create_a_nickname nickname
