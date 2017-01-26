@@ -14,6 +14,8 @@ class Conversation
       REDIS.set u_id, @c_id
       send_match(u_id, @user_ids, topic)
     end
+
+    @c_id
   end
 
   def self.broadcast_from_user(user_id, nickname, message)
