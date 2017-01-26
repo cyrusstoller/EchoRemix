@@ -83,4 +83,21 @@ class Conversation
     res = ChatController.render partial: 'message', locals: { nickname: nickname, message: message_with_markup }
     res.squish
   end
+
+  def self.ended_by_user(user_id)
+    c_id = REDIS.get user_id
+    user_ids = REDIS.smembers c_id
+
+    user_ids.each do |u_id|
+      REDIS.del u_id
+      REDIS.sadd "#{u_id}:recent", user_ids
+      REDIS.expire "#{u_id}:recent", 15
+      broadcast_to_user u_id, { waiting_pool: true }
+    end
+
+    REDIS.del c_id
+
+    # Return all of the user_ids except the one that I entered
+    user_ids.select { |u_id| u_id != user_id }
+  end
 end

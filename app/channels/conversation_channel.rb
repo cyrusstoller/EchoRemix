@@ -39,7 +39,7 @@ class ConversationChannel < ApplicationCable::Channel
   private
 
     def disconnect_from_conversation
-      other_user_ids = Matcher.conversation_ended_by_user(user_id)
+      other_user_ids = Conversation.ended_by_user(user_id)
       other_user_ids.each do |u_id|
         # Put the other users into the waiting pool
         Matcher.create_chat(u_id)
