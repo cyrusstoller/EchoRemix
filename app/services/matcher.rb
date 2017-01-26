@@ -16,8 +16,9 @@ class Matcher
       conversation.create
     else
       REDIS.sadd(WAITING_POOL, user_id)
-      REDIS.sadd(WAITING_POOL, prev_partners) unless prev_partners.empty?
     end
+
+    REDIS.sadd(WAITING_POOL, prev_partners) unless prev_partners.empty?
   end
 
   def self.remove(user_id)
