@@ -15,8 +15,6 @@ App.conversation = App.cable.subscriptions.create "ConversationChannel",
     place_links(data)
     place_topic(data)
     show_typing(data)
-    scroll_bottom('#chat-container')
-    scroll_bottom('#links-container')
     color_my_nickname()
     back_in_waiting_pool(data)
     # console.log data
@@ -114,6 +112,7 @@ add_link = (partial) ->
 add_message = (partial) ->
   # assumes that it's a 'div'
   $('#chat-history').append(partial)
+  scroll_bottom('#chat-container')
 
 color_my_nickname = () ->
   $('span.label[data-nickname=\'' + nickname() + '\']').addClass("alert")
@@ -132,7 +131,7 @@ place_links = (data) ->
   if data.message
     for link in $(data.message).find('a')
       add_link(link.outerHTML)
-    return
+    scroll_bottom('#links-container')
 
 place_topic = (data) ->
   if data.topic
