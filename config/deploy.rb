@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.8.2"
+lock "3.11.0"
 
 set :application, "echoremix"
 set :repo_url, "git@github.com:cyrusstoller/EchoRemix.git"
