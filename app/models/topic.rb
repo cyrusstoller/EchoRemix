@@ -12,7 +12,7 @@ class Topic < ApplicationRecord
       else
         res = all()
       end
-      res.order("RANDOM()").first.text
+      res.order(Arel.sql("RANDOM()")).first.text
     rescue
       "Waiting for new topics ..."
     end
